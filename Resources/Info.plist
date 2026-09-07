@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleExecutable</key>
+	<string>Nock</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.cade.Nock</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Nock</string>
+	<key>CFBundleDisplayName</key>
+	<string>Nock</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>14.0</string>
+	<key>LSUIElement</key>
+	<true/>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.music</string>
+	<key>NSHighResolutionCapable</key>
+	<true/>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>Nock needs to control Apple Music and Spotify so it can show what’s playing and skip tracks from the island.</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Nock reads the current Apple Music track to display it around the notch.</string>
+</dict>
+</plist>
