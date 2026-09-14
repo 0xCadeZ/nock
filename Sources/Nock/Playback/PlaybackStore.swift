@@ -13,6 +13,8 @@ final class PlaybackStore: ObservableObject {
     let nowPlaying = NowPlayingController()
     let appearance = AppearanceStore()
 
+    private static let playerBundleIDs: Set<String> = [MusicController.bundleID, SpotifyController.bundleID]
+
     private var settings: SettingsStore
     private var tick: Timer?
     private var poll: Timer?
@@ -51,6 +53,18 @@ final class PlaybackStore: ObservableObject {
             object: nil,
             queue: .main
         ) { [weak self] _ in
+            Task { @MainActor in await self?.refresh() }
+        }
+        // Clear the notch as soon as a player quits instead of waiting for the next poll.
+        NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.didTerminateApplicationNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] note in
+            guard let app = note.userInfo?[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication,
+                  let bundleID = app.bundleIdentifier,
+                  Self.playerBundleIDs.contains(bundleID)
+            else { return }
             Task { @MainActor in await self?.refresh() }
         }
         poll = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true) { [weak self] _ in
@@ -136,11 +150,11 @@ final class PlaybackStore: ObservableObject {
 
     func openInPlayer() {
         if let bundle = track?.bundleIdentifier {
-            AppleScriptBridge.activate(bundle)
+            RunningApps.activate(bundle)
         } else if snapshot.source == .spotify {
-            AppleScriptBridge.activate("com.spotify.client")
+            RunningApps.activate(SpotifyController.bundleID)
         } else {
-            AppleScriptBridge.activate("com.apple.Music")
+            RunningApps.activate(MusicController.bundleID)
         }
     }
 

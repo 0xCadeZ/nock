@@ -18,6 +18,7 @@ Xcode is not required. Command Line Tools plus Swift 6 are enough:
 make adapter   # once — builds the MediaRemote helper for system-wide Now Playing
 make app
 open build/Nock.app
+make test      # needs Xcode.app for the test frameworks; adds live checks when Spotify is open
 ```
 
 The island sits in the hardware notch on notched MacBooks. On other displays it becomes a floating top-center capsule.
